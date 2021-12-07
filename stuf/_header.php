@@ -51,9 +51,8 @@ echo '
        '.$_SESSION['username'].'
        </a>
        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li> <button type="button" class="btn btn-success mx-2 " data-bs-toggle="modal" data-bs-target="#logoutmodal" >
-           Logout
-          </button></li>
+            
+            <li><a class="dropdown-item" href="/notes/logout.php">Logout</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
