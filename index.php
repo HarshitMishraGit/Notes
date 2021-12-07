@@ -3,11 +3,24 @@
 include('stuf/_header.php');
 
 
-// Alert if anyone request the server to post note without login
+// Alert when someone click the add button and send the post request to the server
 if ($_SERVER['REQUEST_METHOD']=='POST') {
-    echo '<div class="alert alert-warning" role="alert">
-   Login to add the notes!
-  </div>';}
+            if (isset($_SESSION['username'])) {
+                echo '<div class="alert alert-success alert-dismissible" role="alert">
+        Successfully ! Added the note to your library
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+            }
+    // Alert if anyone request the server to post note without login
+            else{
+                echo '<div class="alert alert-warning alert-dismissible" role="alert">
+        Login to add the notes!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+        
+            }
+    }
+
 
   
 
@@ -77,7 +90,7 @@ else{
     <div class="container-fluid w-75 p-3">
 
 
-        <div class="d-flex" >
+        <div class="d-flex">
             <h2>Add a Note</h2>
             <div class="icon ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -97,14 +110,15 @@ else{
 
         <form action="/notes/index.php" method="post">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label" >Title</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="title" id="title" required>
+                <label for="exampleInputEmail1" class="form-label">Title</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    name="title" id="title" required>
                 <div id="emailHelp" class="form-text">Every title is unique</div>
             </div>
             <div class="form-group my-3">
                 <label for="exampleFormControlTextarea1">NOTE</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="note"
-                    id="note" required></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="note" id="note"
+                    required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary" name="submit">Add</button>
@@ -141,7 +155,7 @@ else{
     $title=$_POST['title'];
     $note=$_POST['note'];
     $username=$_SESSION['username'];
-    echo var_dump($title);
+    // echo var_dump($title);
 
 // INSERT INTO `notes` (`sno.`, `user_id`, `title`, `note`, `date`) VALUES ('1', '4', 'hello', 'hello kaise hai aap log', current_timestamp());
 
@@ -158,7 +172,7 @@ $sql=" INSERT INTO `notes` (`user_id`, `title`, `note`) VALUES ('$username', '$t
 $result=mysqli_query($conn,$sql);
 
 if ($result) {
-    echo "Successfully added note";
+    // echo "Successfully added note";
 }
 else{
     session_start();
@@ -202,6 +216,7 @@ if (isset($_SESSION['username'])) {
         <th scope="col">Title</th>
         <th scope="col">note</th>
         <th scope="col">date</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>';
     $i=1;
@@ -220,6 +235,8 @@ if (isset($_SESSION['username'])) {
             <td>'.$row3['title'].'</td>
             <td>'.$row3['note'].'</td>
             <td>'.$row3['date'].'</td>
+            <td><button type="button"class="btn" name="edit">Edit</button>
+            <button type="button"class="btn" name="edit">Delete</button></td>
           </tr>
           <tr>';
           $i++;
@@ -232,4 +249,3 @@ if (isset($_SESSION['username'])) {
 
 
 ?>
-

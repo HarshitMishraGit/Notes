@@ -13,12 +13,12 @@
 
         if($num>0){
 
-  
+            $error="invaliduser";
             echo '<div class="alert alert-warning" role="alert">
             <strong>Alert!</strong> User is Already exists<a href="/notes/login.php" class="alert-link">Login here</a>
             </div>';
-            header("Location: notes/index.php");
-                
+            header("Location: /notes/index.php?signupsuccess=false&error=$error");
+            exit(); 
           }
         
         else if($cpassword==$password){
@@ -31,18 +31,18 @@
             $res=mysqli_query($conn,$sql);
             
             
-            header("Location: /notes/index.php");
-            echo '<div class="alert alert-success" role="alert">
-            <strong>Success!</strong> You Successfully register your account
-             </div> ';
-            
+            header("Location: /notes/index.php?signupsuccess=true");
+            exit();
+           
              
             }
             else{
+              $error="diffpass";
                 echo '<div class="alert alert-danger" role="alert">
               <strong>Error!</strong> password is not match
               </div> ';
-              header("Location: /notes/index.php");
+              header("Location: /notes/index.php?signupsuccess=false&error=$error");
+              exit();
               }
 
 

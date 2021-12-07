@@ -10,7 +10,10 @@
         $result1=mysqli_query($conn,$search1);
         $num1= mysqli_num_rows($result1);
 
-        
+        if ($num==0) {
+            $error="nouser";
+            header("Location:/notes/index.php?loggedin=false&error=$error");
+        }
         if($num1==1){
             $row=mysqli_fetch_assoc($result1);
             
@@ -20,20 +23,21 @@
                 $_SESSION['username']=$username;
                 $_SESSION['loggedin']=true;
                
-                header("Location:/notes/index.php");
+                header("Location:/notes/index.php?loggedin=true");
                 // If You want to check the functionality 
-                echo "Hello".$username;
-                echo '   <br>';
-                echo 'You are  logged in';
-                echo '   <br>';
-                echo 'This is for checking the session starting';
-                echo '   <br>';
-                echo "Hello   ".$_SESSION['username'];
+                // echo "Hello".$username;
+                // echo '   <br>';
+                // echo 'You are  logged in';
+                // echo '   <br>';
+                // echo 'This is for checking the session starting';
+                // echo '   <br>';
+                // echo "Hello   ".$_SESSION['username'];
                 
 
             }
             else{
-                echo 'You are not logged in';
+                $error="diffpass";
+                header("Location:/notes/index.php?loggedin=false&error=$error");
             }
             // header("Location:/notes/index.php");
 

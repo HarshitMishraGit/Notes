@@ -17,7 +17,7 @@ echo '
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/notes/index.php">Home</a>
+        <a class="nav-link active" aria-current="page" href="/notes/">Home</a>
       </li>
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -88,6 +88,62 @@ echo '
 include('_loginmodal.php');
 include('_signupmodal.php');
 include('_logoutmodal.php');
+
+// <<<<================================Alerts ==================================================>>>>>
+
+
+// We have passed a get parameter in _handlesignup.php
+// if anybody successfully sign up the the signupsuccess(get parameter) has a value = true and we can apply any action on that
+// I am showing the alert on that
+
+// Alert on signUp
+if (isset($_GET['signupsuccess'])&&$_GET['signupsuccess']=="true" ) {
+  echo '<div class="alert alert-success" role="alert">
+  <strong>Success!</strong> You Successfully register your account
+   </div> ';
+  
+}
+
+if (isset($_GET['signupsuccess'])&&$_GET['signupsuccess']=="false") {
+        if ($_GET['error']=="invaliduser") {
+          echo '<div class="alert alert-danger alert-dismissible" role="alert">
+          <strong>Alert!</strong> User is already Exist
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div> ';
+        }
+       else if ($_GET['error']=="diffpass") {
+          echo '<div class="alert alert-danger alert-dismissible" role="alert">
+          <strong>Alert!</strong> Password does not match
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div> ';
+        }
+  
+}
+// Alert on login
+if (isset($_GET['loggedin'])&&$_GET['loggedin']=="true" ) {
+  echo '<div class="alert alert-success alert-dismissible" role="alert">
+  <strong>Welcome back!</strong> You Successfully logged in
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div> ';
+  
+}
+
+if (isset($_GET['loggedin'])&&$_GET['loggedin']=="false") {
+      if ($_GET['error']=="nouser") {
+        echo '<div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>Alert!</strong> User is not Exist. SignUp to login
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> ';
+      }
+    else if ($_GET['error']=="diffpass") {
+        echo '<div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>Alert!</strong> Password does not match
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> ';
+      }
+
+}
+
 
 
 ?>
