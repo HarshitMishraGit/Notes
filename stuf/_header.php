@@ -38,7 +38,7 @@ echo '
       
       
     </ul>
-    <form class="d-flex mb-1">
+    <form class="d-flex mb-1 " style="width:30%"; >
       <input class="form-control me-2 m-auto" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success  m-auto" type="submit">Search</button>';
      if (isset($_SESSION['username'])) {
@@ -46,13 +46,15 @@ echo '
       // session_start();// agar yha par hoga to header ki height badh jayegi
      
       echo' 
-        <div class="container dropdown">
+        <div class="container dropdown ">
        <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
        '.$_SESSION['username'].'
        </a>
        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            
-            <li><a class="dropdown-item" href="/notes/logout.php">Logout</a></li>
+       <li> <button type="button" class="btn btn-success mx-2 " data-bs-toggle="modal" data-bs-target="#logoutmodal" >
+       Logout
+      </button></li>
+           
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -86,6 +88,7 @@ echo '
 include('_loginmodal.php');
 include('_signupmodal.php');
 include('_logoutmodal.php');
+
 
 ?>
 

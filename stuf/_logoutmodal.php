@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <h5>Do you want to logout</h5>
-                <form action="/notes/stuf/_logoutmodal.php" method="post">
+                <form action="/notes/logout.php" method="post">
                 <button type="submit" name="submit" class="btn btn-success">Yes</button>
                 </form>
             </div>
@@ -22,23 +22,3 @@
     </div>
 </div>
 
-<?php 
-
-
-// if($_SERVER['REQUEST_METHOD']=='POST'){
-//     // session_start();
-//     if (isset($_SESSION['username'])) {
-
-
-
-
-//     session_unset();
-//     session_destroy();
-//     header('Location: /notes/index.php');
-// }
-// header('Location: /notes/index.php');
-
-// }
-
-
-?>

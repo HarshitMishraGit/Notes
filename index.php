@@ -3,6 +3,15 @@
 include('stuf/_header.php');
 
 
+// Alert if anyone request the server to post note without login
+if ($_SERVER['REQUEST_METHOD']=='POST') {
+    echo '<div class="alert alert-warning" role="alert">
+   Login to add the notes!
+  </div>';}
+
+  
+
+//   --------------------------------------------------------------------
 // include('stuf/_dbconnect.php');
 // echo $_SESSION['username'];
 // session start karege taki agar user ka session chal rha hai to uska username le sake
@@ -10,11 +19,13 @@ include('stuf/_header.php');
 // agar user ka session chal rha hai or usne apna username set kiya hai tabhi welcome kare.
 if(isset($_SESSION['username'])){
    
-    echo '<div class="container d-flex justify-content-center my-5">';
-    echo "<h2>";
-    echo "Welcome <strong>". $_SESSION['username']."</strong>" ; 
-    echo "</h2>";
-    echo "</div>";
+    echo '   <div class="jumbotron container  mt-5 my-4 ">
+    <h3 class="display-4 ">Welcome <strong>'. $_SESSION['username'].'</strong></h3>
+    <p class="lead"> Ready to Add and personalize your notes.</p>
+    <hr class="my-4">
+   
+   
+  ';
  
 }
 // agar user ka username hi set nahi hai to use login karne ko bole 
@@ -66,7 +77,7 @@ else{
     <div class="container-fluid w-75 p-3">
 
 
-        <div class="d-flex">
+        <div class="d-flex" >
             <h2>Add a Note</h2>
             <div class="icon ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -126,7 +137,7 @@ else{
   include ('stuf/_dbconnect.php');
 
   
-  if ($_SERVER['REQUEST_METHOD']=='POST'&& $_SESSION['username']) {
+  if ($_SERVER['REQUEST_METHOD']=='POST'&& isset($_SESSION['username'])) {
     $title=$_POST['title'];
     $note=$_POST['note'];
     $username=$_SESSION['username'];
@@ -170,6 +181,26 @@ else{
 
   }
 
+if (isset($_SESSION['username'])) {
+
+    $username=$_SESSION['username'];
+    // echo $username;
+    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ";
+    $result3=mysqli_query($conn,$search3);
+    // echo var_dump($result3);
+    
+    $num3= mysqli_num_rows($result3);
+     while ($row3=mysqli_fetch_assoc($result3)) {
+        //  echo " The title is".$row3['title']."and the note is".$row3.";
+        //  echo "";
+        echo "The title is ".$row3['title']." and the note is ".$row3['note'];
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+     }
+}
+
 
 
 ?>
+

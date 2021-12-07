@@ -19,6 +19,7 @@
                 session_start();
                 $_SESSION['username']=$username;
                 $_SESSION['loggedin']=true;
+               
                 header("Location:/notes/index.php");
                 // If You want to check the functionality 
                 echo "Hello".$username;
