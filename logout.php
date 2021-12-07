@@ -19,11 +19,12 @@ if(isset($_SESSION['username'])){
 
 session_unset();
 session_destroy();
+// header("Location: /notes/index.php");
 
 }
 // agar user login hi nahi hai to use login page par redirect kar do
 else{
-    header("Location: /notes/login.php");
+    header("Location: /notes/index.php");
 }
 
 

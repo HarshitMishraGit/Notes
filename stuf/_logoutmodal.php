@@ -25,20 +25,20 @@
 <?php 
 
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    session_start();
-if (isset($_SESSION['username'])) {
+// if($_SERVER['REQUEST_METHOD']=='POST'){
+//     // session_start();
+//     if (isset($_SESSION['username'])) {
 
 
 
 
-    session_unset();
-    session_destroy();
-    header('Location: /notes/index.php');
-}
+//     session_unset();
+//     session_destroy();
+//     header('Location: /notes/index.php');
+// }
 // header('Location: /notes/index.php');
 
-}
+// }
 
 
 ?>

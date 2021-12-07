@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 // Making a navbar that can be use as a template by include function
 echo '
 <head>
