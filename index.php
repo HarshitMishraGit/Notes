@@ -190,14 +190,43 @@ if (isset($_SESSION['username'])) {
     // echo var_dump($result3);
     
     $num3= mysqli_num_rows($result3);
+    
+    echo ' 
+    <div style=" height: 700px;
+    
+    overflow: scroll;">
+    <table class="table table-hover table-bordered table-light" >
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">note</th>
+        <th scope="col">date</th>
+      </tr>
+    </thead>';
+    $i=1;
      while ($row3=mysqli_fetch_assoc($result3)) {
-        //  echo " The title is".$row3['title']."and the note is".$row3.";
-        //  echo "";
-        echo "The title is ".$row3['title']." and the note is ".$row3['note'];
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
+        
+        // echo "The title is ".$row3['title']." and the note is ".$row3['note'];
+        // echo "<br>";
+        // echo "<br>";
+        // echo "<br>";
+
+      
+        echo'
+        <tbody class="h-25 overflow-auto">
+          <tr>
+            <th scope="row">'.$i.'</th>
+            <td>'.$row3['title'].'</td>
+            <td>'.$row3['note'].'</td>
+            <td>'.$row3['date'].'</td>
+          </tr>
+          <tr>';
+          $i++;
      }
+     echo '</div>';
+   
+    
 }
 
 
