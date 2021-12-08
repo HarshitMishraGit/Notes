@@ -33,7 +33,7 @@ echo '
       
       
       <li class="nav-item">
-        <a class="nav-link" href="/notes/logout.php">logout</a>
+        <a class="nav-link" href="/notes/yournotes.php">Your Notes</a>
       </li>
       
       

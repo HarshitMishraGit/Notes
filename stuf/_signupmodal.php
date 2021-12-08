@@ -15,17 +15,17 @@
 
                     <div class="mb-3">
                         <label for="username" class="username">UserName</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <input type="text" class="form-control" id="username1" name="username">
 
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" id="password"
+                        <label for="Password" class="form-label">Password</label>
+                        <input type="password" class="form-control"  id="password"
                             name="password">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" id="cpassword"
+                        <label for="cPassword" class="form-label"> Confirm Password</label>
+                        <input type="password" class="form-control"  id="cpassword"
                             name="cpassword">
                         <div id="emailHelp" class="form-text">Make sure to enter same password</div>
                     </div>

@@ -5,23 +5,22 @@ include('stuf/_header.php');
 
 // Alert when someone click the add button and send the post request to the server
 if ($_SERVER['REQUEST_METHOD']=='POST') {
-    if (isset($_SESSION['username'])) {
-        echo '<div class="alert alert-success alert-dismissible" role="alert">
-Successfully ! Added the note to your library
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
-
-       
+            if (isset($_SESSION['username'])) {
+                echo '<div class="alert alert-success alert-dismissible" role="alert">
+        Successfully ! Added the note to your library
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+            }
+    // Alert if anyone request the server to post note without login
+            else{
+                echo '<div class="alert alert-warning alert-dismissible" role="alert">
+        Login to add the notes!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+        
+            }
     }
-// Alert if anyone request the server to post note without login
-    else{
-        echo '<div class="alert alert-warning alert-dismissible" role="alert">
-Login to add the notes!
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>';
 
-    }
-}
 
   
 
@@ -36,7 +35,10 @@ if(isset($_SESSION['username'])){
     echo '   <div class="jumbotron container  mt-5 my-4 ">
     <h3 class="display-4 ">Welcome <strong>'. $_SESSION['username'].'</strong></h3>
     <p class="lead"> Ready to Add and personalize your notes.</p>
-    <hr class="my-4">';
+    <hr class="my-4">
+   
+   
+  ';
  
 }
 // agar user ka username hi set nahi hai to use login karne ko bole 
@@ -119,7 +121,7 @@ else{
                     required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" name="submit"> Add</button>
+            <button type="submit" class="btn btn-primary" name="submit">Add</button>
         </form>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
@@ -173,7 +175,7 @@ if ($result) {
     // echo "Successfully added note";
 }
 else{
-    // session_start();
+    session_start();
    
     die( "Error!!!!!!!!!!!!!!".mysqli_connect_error());
 }
@@ -193,103 +195,55 @@ else{
 
   }
 
-// if (isset($_SESSION['username'])) {
+if (isset($_SESSION['username'])) {
 
-//     $username=$_SESSION['username'];
-//     // echo $username;
-//     $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ";
-//     $result3=mysqli_query($conn,$search3);
-//     // echo var_dump($result3);
+    $username=$_SESSION['username'];
+    // echo $username;
+    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ";
+    $result3=mysqli_query($conn,$search3);
+    // echo var_dump($result3);
     
-//     $num3= mysqli_num_rows($result3);
+    $num3= mysqli_num_rows($result3);
     
-
-//     // <<<<<========================fetching data in a table===========================================>>>>
-//     // echo ' 
-//     // <div style=" height: 700px;
+    echo ' 
+    <div style=" height: 700px;
     
-//     // overflow: scroll;">
-//     // <table class="table table-hover table-bordered table-light" >
-//     // <thead>
-//     //   <tr>
-//     //     <th scope="col">No.</th>
-//     //     <th scope="col">Title</th>
-//     //     <th scope="col">note</th>
-//     //     <th scope="col">date</th>
-//     //     <th scope="col">Action</th>
-//     //   </tr>
-//     // </thead>';
-//     // $i=1;
-//     //  while ($row3=mysqli_fetch_assoc($result3)) {
+    overflow: scroll;">
+    <table class="table table-hover table-bordered table-light" >
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">note</th>
+        <th scope="col">date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>';
+    $i=1;
+     while ($row3=mysqli_fetch_assoc($result3)) {
         
-//     //     // echo "The title is ".$row3['title']." and the note is ".$row3['note'];
-//     //     // echo "<br>";
-//     //     // echo "<br>";
-//     //     // echo "<br>";
+        // echo "The title is ".$row3['title']." and the note is ".$row3['note'];
+        // echo "<br>";
+        // echo "<br>";
+        // echo "<br>";
 
       
-//     //     echo'
-//     //     <tbody class="h-25 overflow-auto">
-//     //       <tr>
-//     //         <th scope="row">'.$i.'</th>
-//     //         <td>'.$row3['title'].'</td>
-//     //         <td>'.$row3['note'].'</td>
-//     //         <td>'.$row3['date'].'</td>
-//     //         <td><button type="button"class="btn" name="edit">Edit</button>
-//     //         <button type="button"class="btn" name="edit">Delete</button></td>
-//     //       </tr>
-//     //       <tr>';
-//     //       $i++;
-//     //  }
-//     //  echo '</div>';
-// //    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//   $i=1;
-//  while ($row3=mysqli_fetch_assoc($result3)) {
-
-//     echo '<div class="jumbotron my-3 py-3">
-//     <h1 class="display-4">'.$row3['title'].'</h1>
+        echo'
+        <tbody class="h-25 overflow-auto">
+          <tr>
+            <th scope="row">'.$i.'</th>
+            <td>'.$row3['title'].'</td>
+            <td>'.$row3['note'].'</td>
+            <td>'.$row3['date'].'</td>
+            <td><button type="button"class="btn" name="edit">Edit</button>
+            <button type="button"class="btn" name="edit">Delete</button></td>
+          </tr>
+          <tr>';
+          $i++;
+     }
+     echo '</div>';
+   
     
-//     <p class="lead"> - by : <strong><em>'.$username.'</em>  </strong> on '.$row3['date'].' </p>
-//     <hr class="my-4">
-//     <p>'.$row3['title'].'</p>
-//     <p class="lead">
-    
-//     <!-- Button trigger  Edit modal -->
-//     <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#editmodal" id="'.$row3['sno.'].'">
-//      Edit
-//     </button>
-//     <!-- Button trigger  Edit modal -->
-//     <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#deletemodal">
-//       Delete
-//     </button>
-     
-//     </p>
-//   </div>';
-
-
-//  }
-//  include('stuf/_editmodal.php');
-//  include('stuf/_deletemodal.php');
-
-// }
-if ($_SERVER['REQUEST_METHOD']=='POST') {
-    if (isset($_SESSION['username'])) {
-
-    // header("Location:/notes/yournotes.php?add=true");
-    echo'<script>
-
-    set window.location="yournotes.php"
-</script>';
-       
-    }
-// // Alert if anyone request the server to post note without login
-//     else{
-//         echo '<div class="alert alert-warning alert-dismissible" role="alert">
-// Login to add the notes!
-// <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-// </div>';
-
-//     }
 }
 
 

@@ -1,4 +1,3 @@
-
 <!-- login Modal with trigger id #loginmodal -->
 
 <div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -18,8 +17,8 @@
 
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" id="password"
+                        <label for="Password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password1"
                             name="password">
                     </div>
 
