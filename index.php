@@ -1,6 +1,10 @@
 <?php 
 
 include('stuf/_header.php');
+if (isset($_SESSION['username'])){
+
+    echo '<input type="hidden" id="user" value="'.$_SESSION['username'].'">';
+}
 
 
 // <<<<<<<<<=================search button fxning================>>>>>>>>>>>>
@@ -9,8 +13,8 @@ include('stuf/_header.php');
 if (isset($_GET['search'])) {
   include 'stuf/_dbconnect.php';
     if (isset($_SESSION['username'])) {
-      
-    $username=$_SESSION['username'];
+        $username=$_SESSION['username'];
+        
   
     // $key=$_POST['search'];
    
@@ -96,8 +100,8 @@ Login to add the notes!
 if(isset($_SESSION['username'])){
    
     echo '   <div class="jumbotron container  mt-5 my-4 ">
-    <h3 class="display-4 ">Welcome <strong>'. $_SESSION['username'].'</strong></h3>
-    <p class="lead"> Ready to Add and personalize your notes.</p>
+    <h3 class="display-4 auto-input"></h3>
+    <p class="lead">Ready to Add and personalize your notes.</p>
     <hr class="my-4">';
  
 }
@@ -197,6 +201,21 @@ else{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
     <script>
+
+    </script>
+     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+      // Can also be included with a regular script tag
+        let user=document.getElementById('user').value;
+        console.log(user);
+        var typed = new Typed(".auto-input",{
+          strings: ['I am '+ user.bold(), 'I love helping others.'],
+          typeSpeed: 100,
+          backSpeed:100,
+          loop:true
+
+        })
+
 
     </script>
 </body>
