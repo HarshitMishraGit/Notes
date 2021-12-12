@@ -15,6 +15,111 @@ include ('stuf/_dbconnect.php');
 echo '<h1 class=" p-3 text-center bg-warning text-danger">Your notes</h1>';
 
 
+// <<<<<<<<<=================search button fxning================>>>>>>>>>>>>
+
+if (isset($_GET['search'])) {
+    if (isset($_SESSION['username'])) {
+      
+    $username=$_SESSION['username'];
+  
+    // $key=$_POST['search'];
+   
+    // echo   'Congo!!!!you are on search page';
+    // ============================
+    $query = $_GET['search'];
+    $sql12 = "SELECT * FROM `notes` where MATCH (`title`,`note`) AGAINST ('$query')"; 
+    $result12 = mysqli_query($conn, $sql12);
+    // echo var_dump($result12);
+    echo '<br>';
+  
+    $n=mysqli_num_rows($result12);
+    // echo $n;
+   
+    echo '<div class="container">';
+    while($row12 = mysqli_fetch_assoc($result12)){
+        $title = $row12['title'];
+        $desc = $row12['note']; 
+        $serielno= $row12['sno.'];
+        $url = "yournotes.php?note_id=". $serielno;
+
+
+
+            // Display the search result
+            echo '
+                  <div class="jumbotron my-3 py-3  container" id="jumbo">
+    
+                  <h1 class="display-4">'.$row12['title'].'</h1>
+                
+                  <p class="lead"> - by : <strong><em>'.$username.'</em>  </strong> on '.$row12['date'].' </p>
+                  <hr class="my-4">
+                  <p>'.$row12['note'].'</p>
+                  <a href="yournotes.php#'.$serielno.'" class="btn btn-sm btn-success"role="button"> Preview</a>  
+                    
+                  </div>
+                  ';
+  }
+
+  echo '</div>';
+  
+ 
+
+    }
+  
+  else{
+    echo 'not logged in';
+  }
+  
+    
+    exit();
+  
+  }
+// ============================================================================================================
+
+// // ==========================search k baad agar link par click karega to=======================================
+// if (isset($_GET['note_id'])) {
+  
+//   if (isset($_SESSION['username'])) {
+    
+//   $username=$_SESSION['username'];
+
+//   $key=$_GET['note_id'];
+ 
+ 
+//   // ============================
+
+//   $sql33 = "SELECT * FROM `notes` where `sno.`=' $key' && `user_id`='$username'"; 
+//   $result33 = mysqli_query($conn, $sql33);
+//   echo var_dump($result33);
+//   echo '<br>';
+
+  
+
+//   while($row33 = mysqli_fetch_assoc($result33)){
+//       $title = $row33['title'];
+//       $desc = $row33['note']; 
+//       $serielno= $row12['sno.'];
+//       $url = "yournotes.php?note_id=". $serielno;
+//           // Display the search result
+//           echo '<div class="result">
+//                       <h3><a href="'. $url. '" class="text-dark">'. $title. '</a> </h3>
+//                       <p>'. $desc .'</p>
+//                 </div>'; 
+         
+  
+  
+  
+// }
+//   }
+
+// else{
+//   echo 'not logged in';
+// }
+
+  
+//   exit();
+
+// }
+// ============================================================================================================
 if (isset($_SESSION['username'])) {
 
     $username=$_SESSION['username'];
@@ -33,7 +138,7 @@ if (isset($_SESSION['username'])) {
 
     echo '<div class="jumbotron my-3 py-3  container" id="jumbo">
     
-    <h1 class="display-4">'.$row3['title'].'</h1>
+    <h1 class="display-4" id="'.$row3['sno.'].'">'.$row3['title'].'</h1>
     <input type="hidden" name="note_id" value="'.$row3['sno.'].'">
     <p class="lead"> - by : <strong><em>'.$username.'</em>  </strong> on '.$row3['date'].' </p>
     <hr class="my-4">

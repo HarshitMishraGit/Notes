@@ -38,8 +38,9 @@ echo '
       
       
     </ul>
-    <form class="d-flex mb-1 " style="width:30%"; >
-      <input class="form-control me-2 m-auto" type="search" placeholder="Search" aria-label="Search">
+    <form class="d-flex mb-1 "  style="width:30%";>
+    <!-- giving name to search so that we can get a get parameter --> 
+      <input class="form-control me-2 m-auto" type="search" placeholder="Search" aria-label="Search" name="search">
       <button class="btn btn-success  m-auto" type="submit">Search</button>';
      if (isset($_SESSION['username'])) {
 

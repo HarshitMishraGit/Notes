@@ -3,6 +3,68 @@
 include('stuf/_header.php');
 
 
+// <<<<<<<<<=================search button fxning================>>>>>>>>>>>>
+
+
+if (isset($_GET['search'])) {
+  include 'stuf/_dbconnect.php';
+    if (isset($_SESSION['username'])) {
+      
+    $username=$_SESSION['username'];
+  
+    // $key=$_POST['search'];
+   
+    // echo   'Congo!!!!you are on search page';
+    // ============================
+    $query = $_GET['search'];
+    $sql12 = "SELECT * FROM `notes` where MATCH (`title`,`note`) AGAINST ('$query')"; 
+    $result12 = mysqli_query($conn, $sql12);
+    // echo var_dump($result12);
+    echo '<br>';
+  
+    $n=mysqli_num_rows($result12);
+    // echo $n;
+   
+    echo '<div class="container">';
+    while($row12 = mysqli_fetch_assoc($result12)){
+        $title = $row12['title'];
+        $desc = $row12['note']; 
+        $serielno= $row12['sno.'];
+        $url = "yournotes.php?note_id=". $serielno;
+
+
+
+            // Display the search result
+            echo '
+                  <div class="jumbotron my-3 py-3  container" id="jumbo">
+    
+                  <h1 class="display-4">'.$row12['title'].'</h1>
+                
+                  <p class="lead"> - by : <strong><em>'.$username.'</em>  </strong> on '.$row12['date'].' </p>
+                  <hr class="my-4">
+                  <p>'.$row12['note'].'</p>
+                  <a href="yournotes.php#'.$serielno.'" class="btn btn-sm btn-success"role="button"> Preview</a>  
+                    
+                  </div>
+                  ';
+  }
+
+  echo '</div>';
+  
+ 
+
+    }
+  
+  else{
+    echo 'not logged in';
+  }
+  
+    
+    exit();
+  
+  }
+// ==============================================
+
 // Alert when someone click the add button and send the post request to the server
 if ($_SERVER['REQUEST_METHOD']=='POST') {
     if (isset($_SESSION['username'])) {
