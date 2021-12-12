@@ -1,8 +1,13 @@
 <?php 
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
- 
-    echo "Deleting your note..........";
+    $sn=$_POST['deletenote_id'];
+    include('_dbconnect.php');
+    $delete="DELETE FROM `notes` WHERE `sno.`='$sn' ";
+    $result5=mysqli_query($conn,$delete);
+    // echo var_dump($result5);
+  
+    header("Location:/notes/yournotes.php?delete=true");
     exit();
 }
 
@@ -26,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
             </div>
             <div class="modal-body">
                 <h5>Do you want to delete this note</h5>
-                <form action="/notes/stuf/_deletemodal.php" method="post">
+                <form action="/notes/stuf/_deletemodal.php" method="post" id="deletenote">
+                 <input type="hidden" name="deletenote_id" id="deletenote_id">
                 <button type="submit" name="submit" class="btn btn-success">Yes</button>
                 </form>
             </div>

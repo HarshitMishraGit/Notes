@@ -143,6 +143,22 @@ if (isset($_GET['loggedin'])&&$_GET['loggedin']=="false") {
       }
 
 }
+// alerts on deleted notes
+if (isset($_GET['delete'])&&$_GET['delete']=="true" ) {
+  echo '<div class="alert alert-warning alert-dismissible my-0" role="alert">
+  <strong>Hey!</strong> You Deleted a note 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div> ';
+  
+}
+// alerts on edit notes
+if (isset($_GET['edit'])&&$_GET['edit']=="true" ) {
+  echo '<div class="alert alert-success alert-dismissible my-0" role="alert">
+  <strong>Hey!</strong> You Edited a note 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div> ';
+  
+}
 
 
 

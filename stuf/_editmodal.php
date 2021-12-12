@@ -16,6 +16,7 @@
                     name="edittitle" id="edittitle" required>
                 <div id="emailHelp" class="form-text">Every title is unique</div>
             </div>
+            <input type="hidden" name="editnote_id" id="editnote_id">
             <div class="form-group my-3" id="editmodaldiv">
                 <label for="exampleFormControlTextarea1">NOTE</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="editnote" id="editnote"
@@ -40,14 +41,23 @@ if (isset($_POST['edittitle'])) {
     include('_dbconnect.php');
     $edittitle=$_POST['edittitle'];
     $editnote=$_POST['editnote'];
+    $sno=$_POST['editnote_id'];
+    echo $sno;
     session_start();
     $username=$_SESSION['username'];
     // echo $username;
-    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' and `title`='$edittitle' and `note`='$edit' ";
-    $result3=mysqli_query($conn,$search3);
-    // echo var_dump($result3);
+    $search4="SELECT * FROM `notes` WHERE `sno.`='$sno' ";
+    $result4=mysqli_query($conn,$search4);
+    // echo var_dump($result4);
     
-    $num3= mysqli_num_rows($result3);
+    $num4= mysqli_num_rows($result4);
+    // echo $num4;
+    $update="UPDATE `notes` SET `title`=' $edittitle',`note`=' $editnote',`date`=current_timestamp() WHERE `sno.`='$sno' ";
+    $result5=mysqli_query($conn,$update);
+
+    header("Location:/notes/yournotes.php?edit=true");
+
+
     
 
 

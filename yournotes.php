@@ -20,7 +20,7 @@ if (isset($_SESSION['username'])) {
     $username=$_SESSION['username'];
     // echo $username;
     // [ORDER BY `sno.` DESC ] is for searching the data in reverse order so that user get his/her added note on the top row
-    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ORDER BY `sno.` DESC ";
+    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ORDER BY `date` DESC ";
     $result3=mysqli_query($conn,$search3);
     // echo var_dump($result3);
     
@@ -34,7 +34,7 @@ if (isset($_SESSION['username'])) {
     echo '<div class="jumbotron my-3 py-3  container" id="jumbo">
     
     <h1 class="display-4">'.$row3['title'].'</h1>
-    
+    <input type="hidden" name="note_id" value="'.$row3['sno.'].'">
     <p class="lead"> - by : <strong><em>'.$username.'</em>  </strong> on '.$row3['date'].' </p>
     <hr class="my-4">
     <p>'.$row3['note'].'</p>
@@ -61,7 +61,7 @@ if (isset($_SESSION['username'])) {
 
 
     <!-- Button trigger  Edit modal -->
-    <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#deletemodal">
+    <button type="button" class="btn btn-success mx-2 delete" data-bs-toggle="modal" data-bs-target="#deletemodal">
       Delete
     </button>
    
@@ -182,6 +182,10 @@ Login
        let note=jumbo.getElementsByTagName('p')[1].innerText;
          console.log(title);// for checking the working
          console.log(note);// for checking the working
+        //  agar edit karoge to pehle uska sno. pta hona chahiye jaha edit karna hai 
+         note_id=jumbo.getElementsByTagName('input')[0].value
+        //  for checking the value of hidden input tag
+         console.log(note_id);
         //  console.log(typeof(title));// for checking thedata type of
         // console.log(note);
         // document.getElementById("edittitle").innerHTML = title;
@@ -204,24 +208,73 @@ Login
         console.log(editmodaldiv);
         // editform.getElementsByTagName('div')[1].getElementsByTagName('taxtarea')[0].value="note";
         editmodaldiv.getElementsByTagName('textarea')[0].value=note;
-
+        editform.getElementsByTagName('input')[1].value=note_id
         // <<<<<<<<<<<<<<------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>
+        
+        // <<<<<<<<<<<<<<-------------------------------working on _deletemodal.php file handling in js--------->>>>>>>>>>>>>>>
+        // pehle form tag ko id dekar use variable mai save kiya
+        deletemodal=document.getElementById('deletemodal')
+        console.log(deletemodal); // for checking that we are getting the form content or not 
+        // // then we get form->div->input tag that is our title
+        // editform.getElementsByTagName('div')[0].getElementsByTagName('input')[0].value=title;
+        // // then we get form->div->input tag that is our note
+        // editmodaldiv=document.getElementById('editmodaldiv')
+        // console.log(editmodaldiv);
+        // // editform.getElementsByTagName('div')[1].getElementsByTagName('taxtarea')[0].value="note";
+        // editmodaldiv.getElementsByTagName('textarea')[0].value=note;
+        // editform.getElementsByTagName('input')[1].value=note_id
+        // // <<<<<<<<<<<<<<------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>
+        
 
 
 
-        // editnote=document.getElementById('editnote');
-        //  editnote.innerHTML=title;
-        //  editnote.innerHTML=note;
-        //  console.log(edittitle); 
-        //  console.log(editnote);
+ 
           
        })
 
 
       })
 
+      // <<<<<<===============delete===================>>>>>>>>>>>>>>>
+      deletes=document.getElementsByClassName('delete');
+      // ek loop run karege jo hmare html k while loop ko follow karega
+      Array.from(deletes).forEach((element)=>{
+       element.addEventListener("click",(e)=>{
+        //  console.log("hello",e.target.parentNode.parentNode);// this give whole object of a note
+        //  jumbo=e.target.parentNode.parentNode;
+        //  title=jumbo.getElementsByTagName("h1")[0].innertext;
+        //  note=jumbo.getElementsByTagName("p")[1].innertext;
+        //  console.log(jumbo,title,note);
+        console.log("delete",);
+        let jumbo=e.target.parentNode.parentNode;
+         console.log(jumbo);
+    
+        //  agar edit karoge to pehle uska sno. pta hona chahiye jaha edit karna hai 
+         note_id=jumbo.getElementsByTagName('input')[0].value
+        //  for checking the value of hidden input tag
+         console.log(note_id);
+        
+        // <<<<<<<<<<<<<<------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>
+        
+        // <<<<<<<<<<<<<<-------------------------------working on _deletemodal.php file handling in js--------->>>>>>>>>>>>>>>
+        // pehle form tag ko id dekar use variable mai save kiya
+        deletenote=document.getElementById('deletenote')
+        console.log(deletenote); // for checking that we are getting the form content or not 
+       
+        deletenote_id=document.getElementById('deletenote_id')
+        deletenote_id.value=note_id // for checking that we are getting the form content or not 
+       
 
 
+
+ 
+          
+       })
+
+
+      })
+      
+      // ====================editmodal end===============================
 
       ok=()=>{
         // this is for checking that we can execute php into javascript-->
