@@ -19,7 +19,8 @@ if (isset($_SESSION['username'])) {
 
     $username=$_SESSION['username'];
     // echo $username;
-    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ";
+    // [ORDER BY `sno.` DESC ] is for searching the data in reverse order so that user get his/her added note on the top row
+    $search3="SELECT * FROM `notes` WHERE `user_id` = '$username' ORDER BY `sno.` DESC ";
     $result3=mysqli_query($conn,$search3);
     // echo var_dump($result3);
     
