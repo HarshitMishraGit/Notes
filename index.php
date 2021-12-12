@@ -214,6 +214,11 @@ else{
   if ($_SERVER['REQUEST_METHOD']=='POST'&& isset($_SESSION['username'])) {
     $title=$_POST['title'];
     $note=$_POST['note'];
+    // replace < and > otherwise it executes the code in the browser
+    $title=str_replace(">","&gt",$title);
+    $title=str_replace("<","&lt",$title);
+    $note=str_replace("<","&lt",$note);
+    $note=str_replace(">","&gt",$note);
     $username=$_SESSION['username'];
     // echo var_dump($title);
 
