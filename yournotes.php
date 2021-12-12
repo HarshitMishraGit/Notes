@@ -73,7 +73,45 @@ if (isset($_SESSION['username'])) {
 
 include('./stuf/_editmodal.php');
 include('./stuf/_deletemodal.php');
- 
+
+// echo ' <script>
+// // I gave class name to my modal trigged button the listen an event on that
+// edits=document.getElementsByClassName("edit");
+// // ek loop run karege jo hmare html k while loop ko follow karega
+// Array.from(edits).forEach((element)=>{
+//  element.addEventListener("click",(e)=>{
+//   //  console.log("hello",e.target.parentNode.parentNode);// this give whole object of a note
+//   //  jumbo=e.target.parentNode.parentNode;
+//   //  title=jumbo.getElementsByTagName("h1")[0].innertext;
+//   //  note=jumbo.getElementsByTagName("p")[1].innertext;
+//   //  console.log(jumbo,title,note);
+//   console.log("edit",);
+//   let jumbo=e.target.parentNode.parentNode;
+//    console.log(jumbo);
+//   //  It should br innerText not innertext 
+//  let title=jumbo.getElementsByTagName("h1")[0].innerText;
+//  let note=jumbo.getElementsByTagName("p")[1].innerText;
+//    console.log(title);// for checking the working
+//   //  console.log(typeof(title));// for checking thedata type of
+//   // console.log(note);
+//   // document.getElementById("edittitle").innerHTML = title;
+//   // document.getElementById("edittitle").value="title";
+//   edittitle=document.getElementById("edittitle")
+//   edittitle.value= "title";
+//   // editnote=document.getElementById("editnote");
+//   //  editnote.innerHTML=title;
+//   //  editnote.innerHTML=note;
+//   //  console.log(edittitle);
+//   //  console.log(editnote);
+    
+//  })
+
+
+// })
+
+
+
+// </script>';
 }
 else{
 
@@ -108,6 +146,7 @@ Login
 
 
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -126,6 +165,7 @@ Login
     <script>
       // I gave class name to my modal trigged button the listen an event on that
       edits=document.getElementsByClassName('edit');
+      // ek loop run karege jo hmare html k while loop ko follow karega
       Array.from(edits).forEach((element)=>{
        element.addEventListener("click",(e)=>{
         //  console.log("hello",e.target.parentNode.parentNode);// this give whole object of a note
@@ -134,10 +174,46 @@ Login
         //  note=jumbo.getElementsByTagName("p")[1].innertext;
         //  console.log(jumbo,title,note);
         console.log("edit",);
-        jumbo=e.target.parentNode.parentNode;
+        let jumbo=e.target.parentNode.parentNode;
          console.log(jumbo);
-         title=jumbo.getElementsByTagName("h1").innertext;
-         console.log(title);
+        //  It should br innerText not innertext 
+       let title=jumbo.getElementsByTagName('h1')[0].innerText;
+       let note=jumbo.getElementsByTagName('p')[1].innerText;
+         console.log(title);// for checking the working
+         console.log(note);// for checking the working
+        //  console.log(typeof(title));// for checking thedata type of
+        // console.log(note);
+        // document.getElementById("edittitle").innerHTML = title;
+        // document.getElementById('edittitle').value="title";
+
+
+        // edittitle=document.getElementById('edittitle').innerHTML;
+        // edittitle.value= "title";
+        // editnote=document.getElementById('editnote')
+        // editnote.value= "title";
+        
+        // <<<<<<<<<<<<<<-------------------------------working on _editmodal.php file handling in js--------->>>>>>>>>>>>>>>
+        // pehle form tag ko id dekar use variable mai save kiya
+        editform=document.getElementById('editform')
+        console.log(editform); // for checking that we are getting the form content or not 
+        // then we get form->div->input tag that is our title
+        editform.getElementsByTagName('div')[0].getElementsByTagName('input')[0].value=title;
+        // then we get form->div->input tag that is our note
+        editmodaldiv=document.getElementById('editmodaldiv')
+        console.log(editmodaldiv);
+        // editform.getElementsByTagName('div')[1].getElementsByTagName('taxtarea')[0].value="note";
+        editmodaldiv.getElementsByTagName('textarea')[0].value=note;
+
+        // <<<<<<<<<<<<<<------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>
+
+
+
+        // editnote=document.getElementById('editnote');
+        //  editnote.innerHTML=title;
+        //  editnote.innerHTML=note;
+        //  console.log(edittitle); 
+        //  console.log(editnote);
+          
        })
 
 
@@ -145,8 +221,13 @@ Login
 
 
 
-    </script>
 
+      ok=()=>{
+        // this is for checking that we can execute php into javascript-->
+        alert(" <?php echo "kya haal hai  ";?>")
+      }
+    </script>
+    <!-- <button onclick="ok()">Press me</button> -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

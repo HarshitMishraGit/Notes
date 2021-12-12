@@ -276,11 +276,14 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     if (isset($_SESSION['username'])) {
 
     // header("Location:/notes/yournotes.php?add=true");
-    echo'<script>
+    // echo'<script>
 
-    set window.location="yournotes.php"
-</script>';
-       
+    //   set window.location="yournotes.php";
+    // </script>';
+    echo'
+    <script>
+    t1 = window.setTimeout(function(){ window.location = "http://localhost/notes/yournotes.php"; },1000);
+    </script>';
     }
 // // Alert if anyone request the server to post note without login
 //     else{
